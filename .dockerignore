@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+
+# Database files
+*.db
+local_db/
+
+# Pytest cache
+.pytest_cache/
+
+# Dockerfile build context exclusions
+Dockerfile
+docker-compose.override.yml
+
+# OS files
+.DS_Store

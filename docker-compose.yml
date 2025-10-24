@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: test_web_app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - ./local_db:/app/local_db
+    command: >
+      bash -c "
+      python -m pytest app/tests -v;
+      python -m app.scripts.init_db;
+      if [ $? -eq 1 ]; then
+        echo 'Loading sample data from file...'
+        python -m app.scripts.cli_script data/events_sample.csv;
+      fi;
+      uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      "
